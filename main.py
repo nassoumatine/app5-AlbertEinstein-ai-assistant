@@ -4,7 +4,6 @@ from langchain_core.messages import HumanMessage, AIMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_google_genai import ChatGoogleGenerativeAI
-import gradio as gr
 
 load_dotenv()
 
@@ -37,40 +36,13 @@ chain = prompt | llm | StrOutputParser()
 
 print("Hi, I am Albert Einstein. How can I help you?")
 
-def chat(user_input, hist):
-    print(user_input, hist)
+history = []
 
-    langchain_history = []
-    for item in hist:
-        if item["role"] == "user":
-            langchain_history.append(HumanMessage(content=item["content"]))
-        elif item["role"] == "assistant":
-            langchain_history.append(AIMessage(content=item["content"]))
-
-    response = chain.invoke({"input": user_input, "history": langchain_history})
-
-    return "", hist + [{"role": "user", "content": user_input},
-                {"role": "assistant", "content": response}]
-
-page = gr.Blocks(
-    title="Chat with Einstein",
-    theme=gr.themes.Soft()
-)
-
-with page:
-    gr.Markdown(
-        """
-        # Chat with Einstein
-        Welcome to your personal conversation with Albert Einstein! 
-        """
-    )
-
-    chatbot = gr.Chatbot(type="messages")
-
-    msg = gr.Textbox()
-
-    msg.submit(chat, [msg, chatbot], [msg, chatbot])
-
-    button = gr.Button("Clear Chat")
-
-page.launch(share=True)
+while True:
+    user_input = input("You: ")
+    if user_input == "exit":
+        break
+    response = chain.invoke({"input": user_input, "history": history})
+    print(f"Albert : {response}")
+    history.append(HumanMessage(content=user_input))
+    history.append(AIMessage(content=response))
