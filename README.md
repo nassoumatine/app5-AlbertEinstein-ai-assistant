@@ -58,6 +58,6 @@ Ask him about physics, philosophy, or life — and he’ll respond with humor, r
     ```
 
 ---
-👩🏾‍💻 Built with curiosity by [Naka Assoumatine](https://github.com/nakaassoumatine).
+👩🏾‍💻 Built with curiosity by [Naka Assoumatine](https://github.com/nassoumatine).
 
    
