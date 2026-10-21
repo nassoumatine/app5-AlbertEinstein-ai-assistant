@@ -65,10 +65,14 @@ with page:
         Welcome to your personal conversation with me! 
         """
     )
+    # chatbot = gr.Chatbot(type="messages",
+    #                      avatar_images=[None, "einstein.png"],
+    #                      show_label=False)
+    avatar = "einstein.png" if os.path.exists("einstein.png") else None
 
     chatbot = gr.Chatbot(type="messages",
-                         avatar_images=[None, "einstein.png"],
-                         show_label=False)
+                     avatar_images=[None, avatar],
+                     show_label=False)
 
     msg = gr.Textbox(show_label=False, placeholder="Ask Einstein anything...")
 
@@ -77,4 +81,4 @@ with page:
     clear_button = gr.Button("Clear Chat")
     clear_button.click(clear_chat, outputs=[msg, chatbot])
 
-page.launch(share=True)
+page.launch()
