@@ -78,3 +78,7 @@ uvicorn==0.37.0
 websockets==15.0.1
 wheel==0.45.1
 zstandard==0.25.0
+python-dotenv
+langchain-core
+langchain-google-genai
+pydantic
